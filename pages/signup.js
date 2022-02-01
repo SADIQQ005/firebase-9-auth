@@ -8,10 +8,11 @@ import Link from "next/link";
 export default function signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
-  function handleLogin(e) {
+  function handleSignUp(e) {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -20,6 +21,9 @@ export default function signup() {
       })
       .catch((error) => {
         console.log(error.message);
+        setError(
+          "Make password more than 6 characters and format email properly"
+        );
         // ..
       });
   }
@@ -29,7 +33,10 @@ export default function signup() {
       <h2 className="text-center font-mono font-extrabold mt-32 text-2xl">
         Firebase 9 authentication <br /> SignUp Page
       </h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSignUp}>
+        {error && (
+          <p className="text-center text-xs mt-3 text-red-400">{error}</p>
+        )}
         <div className="my-2 flex flex-col">
           <label className="text-teal-800 font-bold text-lg tracking-wide">
             Email

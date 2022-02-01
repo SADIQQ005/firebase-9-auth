@@ -8,6 +8,7 @@ import Link from "next/link";
 export default function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState('')
 
   const router = useRouter();
 
@@ -15,11 +16,12 @@ export default function login() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log("logged In" + { userCredential });
+        console.log("logged In");
         router.push("/dashboard");
       })
       .catch((error) => {
         console.log(error);
+        setError('email or password not correct')
         // ..
       });
   }
@@ -31,6 +33,7 @@ export default function login() {
       </h2>
 
       <form onSubmit={handleLogin}>
+      {error && <p className="text-center text-xs mt-3 text-red-400">{error}</p>}
         <div className="my-2 flex flex-col">
           <label className="text-teal-800 font-bold text-lg tracking-wide">
             Email
@@ -63,6 +66,12 @@ export default function login() {
           Don't have an account{" "}
           <Link href="/signup">
             <a className="text-blue-700">sign Up</a>
+          </Link>
+        </p>
+        <p className="text-center text-xs mt-1">
+          Forgotten password?{" "}
+          <Link href="/password">
+            <a className="text-blue-700">Reset Here</a>
           </Link>
         </p>
       </form>
