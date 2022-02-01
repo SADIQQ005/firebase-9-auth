@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function login() {
+export default function signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,13 +13,13 @@ export default function login() {
 
   function handleLogin(e) {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log("logged In" + { userCredential });
+        console.log("Your are registered");
         router.push("/dashboard");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
         // ..
       });
   }
@@ -27,9 +27,8 @@ export default function login() {
   return (
     <div className="w-1/3 mx-auto">
       <h2 className="text-center font-mono font-extrabold mt-32 text-2xl">
-        Firebase 9 authentication <br /> LogIn Page
+        Firebase 9 authentication <br /> SignUp Page
       </h2>
-
       <form onSubmit={handleLogin}>
         <div className="my-2 flex flex-col">
           <label className="text-teal-800 font-bold text-lg tracking-wide">
@@ -60,9 +59,9 @@ export default function login() {
           className="bg-teal-800 w-full mt-2 tracking-wide p-1 focus:outline-none rounded-xl font-bold text-teal-50 text-center"
         />
         <p className="text-center text-xs mt-4">
-          Don't have an account{" "}
-          <Link href="/signup">
-            <a className="text-blue-700">sign Up</a>
+          Already have an account{" "}
+          <Link href="/">
+            <a className="text-blue-700">sign In</a>
           </Link>
         </p>
       </form>
