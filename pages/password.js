@@ -5,7 +5,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 
 import Link from "next/link";
 
-export default function password() {
+function password() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -65,3 +65,5 @@ export default function password() {
     </div>
   );
 }
+
+export default password
