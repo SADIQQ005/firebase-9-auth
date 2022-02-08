@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 function dashboard() {
   const router = useRouter();
 
-  function handlePasswordReset(e) {
+  function handleLogOut(e) {
     e.preventDefault();
     signOut(auth)
       .then(() => {
@@ -24,14 +24,13 @@ function dashboard() {
         Hello mate. <br /> welcome aboard
       </h2>
       <div className="w-1/3 mx-auto">
-        <form onSubmit={handlePasswordReset}>
-          <input
-            type="submit"
-            className="bg-teal-800 w-full mt-2 tracking-wide p-1 focus:outline-none rounded-xl font-bold text-teal-50 text-center"
-          />
+        <form onSubmit={handleLogOut}>
+          <button className="bg-teal-800 w-full mt-2 tracking-wide p-1 focus:outline-none rounded-xl font-bold text-teal-50 text-center">
+            Logout
+          </button>
         </form>
       </div>
     </div>
   );
 }
-export default dashboard
+export default dashboard;
